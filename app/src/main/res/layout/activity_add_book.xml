@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".AddBookActivity">
+
+    <EditText
+        android:id="@+id/edit_text_title"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:background="@drawable/text"
+        android:hint="Kitabın Adı"
+        android:inputType="text"
+        android:layout_marginBottom="5dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:text="Dosya yolunu girin"
+        android:gravity="center"
+        />
+
+
+    <EditText
+        android:id="@+id/edit_text_pdf_text"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/text"
+        android:hint="Dosya yolu"
+        android:inputType="textMultiLine" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="veya"
+        android:gravity="center"
+        />
+    <Button
+        android:id="@+id/button_file_select"
+        android:layout_width="match_parent"
+        android:background="@drawable/selectfromfiles"
+        android:layout_height="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:text="Dosyalarınızdan seçin"
+        />
+
+    <ImageView
+        android:id="@+id/pdfImageView"
+        android:layout_width="150dp"
+        android:layout_height="225dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+
+        />
+
+
+
+</LinearLayout>

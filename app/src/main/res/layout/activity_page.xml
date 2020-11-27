@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Page">
+
+    <TextView
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:id="@+id/book_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="J.R.R. Tolkien’s The Lord of
+the Rings is often erroneously
+called a trilogy, when it is in
+fact a single novel, consisting
+of six books plus appendices,
+sometimes published in three
+volumes.
+The first volume, The
+Fellowship of the Ring, was
+published in Great Britain by
+the London firm George
+Allen Unwin on 29 July
+1954; an American edition
+followed on 21 October of the
+same year, published by"/>
+
+</LinearLayout>
