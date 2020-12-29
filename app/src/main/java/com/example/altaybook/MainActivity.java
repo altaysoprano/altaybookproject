@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     public static final int ADD_BOOK_REQUEST = 1;
 
     private BookViewModel bookViewModel;
-    private ActionMode mActionMode;
+    public ActionMode mActionMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,13 +79,19 @@ public class MainActivity extends AppCompatActivity {
         });
 
         bookAdapter.setOnLongClickListener(new RecyclerViewAdapter.OnLongClickListener() {
+
             @Override
             public void onLongClick() {
+
                 if(mActionMode != null) {
+                    if(bookAdapter.getSelectedBooks().size() == 0) {
+                        mActionMode.finish();
+                    }
                     return;
                 }
 
                 ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
+
                     @Override
                     public boolean onCreateActionMode(ActionMode mode, Menu menu) {
                         mode.getMenuInflater().inflate(R.menu.delete_book_menu, menu);
@@ -110,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
                         default:
                             return false;
                         }
-
                     }
 
                     @Override
@@ -118,16 +123,14 @@ public class MainActivity extends AppCompatActivity {
                         mActionMode = null;
                         for(Book book : bookAdapter.getBookList()) {
                             book.setSelected(false);
+                            bookAdapter.notifyDataSetChanged();
                         }
                         buttonAddBook.setVisibility(View.VISIBLE);
                     }
                 };
                 mActionMode = startSupportActionMode(mActionModeCallback);
-
             }
         });
-
-
     }
 
     @Override

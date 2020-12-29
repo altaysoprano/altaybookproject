@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.ColorLong;
 import androidx.annotation.NonNull;
 import androidx.appcompat.view.ActionMode;
 import androidx.cardview.widget.CardView;
@@ -25,10 +26,10 @@ import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
 
-    private Context mContext;
     private List<Book> bookList = new ArrayList<>();
-    private ActionMode mActionMode;
     private OnLongClickListener onLongClickListener;
+    MainActivity mainActivity;
+    List<Book> selectedBooks;
 
     @NonNull
     @Override
@@ -41,6 +42,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.book_name_tv.setText(bookList.get(position).getName());
         holder.book_image.setImageBitmap(bytesToBitmap(bookList.get(position).getImage()));
+
+        if(bookList.get(position).isSelected()) {
+            holder.itemView.setBackgroundColor(Color.GRAY);
+        }
+        else
+        {
+            holder.itemView.setBackgroundColor(Color.WHITE);
+        }
 
     }
 
@@ -58,11 +67,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         TextView book_name_tv;
         ImageView book_image;
+        CardView cardView;
 
         public MyViewHolder(@NonNull final View itemView) {
             super(itemView);
             book_name_tv = itemView.findViewById(R.id.book_name_id);
             book_image = itemView.findViewById(R.id.book_image_id);
+            cardView = itemView.findViewById(R.id.cardview_id);
 
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
@@ -70,13 +81,22 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     int position = getAdapterPosition();
                     if(bookList.get(position).isSelected()){
                         bookList.get(position).setSelected(false);
+                        notifyDataSetChanged();
                         return false;
                     }
                     bookList.get(position).setSelected(true);
+                    notifyDataSetChanged();
 
                     onLongClickListener.onLongClick();
 
                     return true;
+                }
+            });
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
                 }
             });
         }
@@ -90,15 +110,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.onLongClickListener = onLongClickListener;
     }
 
-
     public List<Book> getSelectedBooks() {
-        List<Book> selectedBooks = new ArrayList<>();
+        selectedBooks = new ArrayList<>();
         for(Book book : bookList) {
             if(book.isSelected()) {
                 selectedBooks.add(book);
             }
         }
         return selectedBooks;
+    }
+
+    public void setSelectedBooks(List<Book> selectedBooks) {
+        this.selectedBooks = selectedBooks;
+        notifyDataSetChanged();
     }
 
     public List<Book> getBookList() {
