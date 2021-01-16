@@ -6,6 +6,7 @@ import android.drm.DrmStore;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,6 +29,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private List<Book> bookList = new ArrayList<>();
     private OnLongClickListener onLongClickListener;
+    private OnClickListener onClickListener;
     MainActivity mainActivity;
     List<Book> selectedBooks;
 
@@ -82,6 +84,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     if(bookList.get(position).isSelected()){
                         bookList.get(position).setSelected(false);
                         notifyDataSetChanged();
+                        onLongClickListener.onLongClick();
                         return false;
                     }
                     bookList.get(position).setSelected(true);
@@ -96,10 +99,29 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    int position = getAdapterPosition();
+                    if(bookList.get(position).isSelected()) {
+                        bookList.get(position).setSelected(false);
+                        notifyDataSetChanged();
+                        onClickListener.onClick();
+                        return;
+                    }
+                    if(getSelectedBooks().size() != 0) {
+                        bookList.get(position).setSelected(true);
+                        notifyDataSetChanged();
+                        onClickListener.onClick();
+                    }
                 }
             });
         }
+    }
+
+    public interface OnClickListener {
+        void onClick();
+    }
+
+    public void setOnClickListener(OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
     }
 
     public interface OnLongClickListener {

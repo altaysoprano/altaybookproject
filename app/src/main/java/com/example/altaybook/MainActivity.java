@@ -22,6 +22,7 @@ import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -78,11 +79,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        bookAdapter.setOnClickListener(new RecyclerViewAdapter.OnClickListener() {
+            @Override
+            public void onClick() {
+                if(mActionMode != null) {
+                    if(bookAdapter.getSelectedBooks().size() == 0) {
+                        mActionMode.finish();
+                    }
+                }
+            }
+        });
+
         bookAdapter.setOnLongClickListener(new RecyclerViewAdapter.OnLongClickListener() {
 
             @Override
             public void onLongClick() {
-
                 if(mActionMode != null) {
                     if(bookAdapter.getSelectedBooks().size() == 0) {
                         mActionMode.finish();
