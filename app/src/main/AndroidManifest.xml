@@ -13,6 +13,7 @@
         android:screenOrientation="landscape"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".BookActivity"></activity>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
@@ -23,10 +24,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddBookActivity"
-            android:screenOrientation="portrait"
+        <activity
+            android:name=".AddBookActivity"
+            android:exported="true"
             android:parentActivityName=".MainActivity"
-            android:exported="true">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.GET_CONTENT" />
 
@@ -37,7 +39,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".Page" />
-
     </application>
 
 </manifest>
