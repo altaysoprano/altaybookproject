@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MediatorLiveData;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ public class BookViewModel extends AndroidViewModel {
 
     private BookRepository bookRepository;
     private LiveData<List<Book>> allBooks;
+    private List<Book> allBooksB;
 
     public BookViewModel(@NonNull Application application) {
         super(application);
@@ -23,10 +25,6 @@ public class BookViewModel extends AndroidViewModel {
         bookRepository.insert(book);
     }
 
-    public void update(Book book) {
-        bookRepository.update(book);
-    }
-
     public void delete(Book book) {
         bookRepository.delete(book);
     }
@@ -34,4 +32,5 @@ public class BookViewModel extends AndroidViewModel {
     public LiveData<List<Book>> getAllBooks() {
         return allBooks;
     }
+
 }

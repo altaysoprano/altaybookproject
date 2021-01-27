@@ -100,24 +100,28 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 @Override
                 public void onClick(View view) {
                     int position = getAdapterPosition();
-                    if(bookList.get(position).isSelected()) {
+                    if(bookList.get(position).isSelected()){
                         bookList.get(position).setSelected(false);
                         notifyDataSetChanged();
-                        onClickListener.onClick();
+                        onClickListener.onClick(position);
                         return;
                     }
                     if(getSelectedBooks().size() != 0) {
                         bookList.get(position).setSelected(true);
                         notifyDataSetChanged();
-                        onClickListener.onClick();
+                        return;
                     }
+
+                    onClickListener.onClick(position);
+
+                    return;
                 }
             });
         }
     }
 
     public interface OnClickListener {
-        void onClick();
+        void onClick(int position);
     }
 
     public void setOnClickListener(OnClickListener onClickListener) {

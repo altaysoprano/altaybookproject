@@ -1,7 +1,6 @@
 package com.example.altaybook;
 
 import android.app.Application;
-import android.content.Context;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
@@ -11,20 +10,16 @@ import java.util.List;
 public class BookRepository {
 
     private BookDao bookDao;
-    private LiveData<List<Book>> allNotes;
+    private LiveData<List<Book>> allBooks;
 
     public BookRepository(Application application) {
         BookDatabase bookDatabase = BookDatabase.getInstance(application);
         bookDao = bookDatabase.bookDao();
-        allNotes = bookDao.getAllBooks();
+        allBooks = bookDao.getAllBooks();
     }
 
     public void insert(Book book) {
         new InsertBookAsyncTask(bookDao).execute(book);
-    }
-
-    public void update(Book book) {
-        new UpdateBookAsyncTask(bookDao).execute(book);
     }
 
     public void delete(Book book) {
@@ -32,7 +27,7 @@ public class BookRepository {
     }
 
     public LiveData<List<Book>> getAllBooks() {
-        return allNotes;
+        return allBooks;
     }
 
     private static class InsertBookAsyncTask extends AsyncTask<Book, Void, Void> {
@@ -42,6 +37,7 @@ public class BookRepository {
         private InsertBookAsyncTask(BookDao bookDao) {
             this.bookDao = bookDao;
         }
+
         @Override
         protected Void doInBackground(Book... books) {
             bookDao.insert(books[0]);
@@ -56,6 +52,7 @@ public class BookRepository {
         private UpdateBookAsyncTask(BookDao bookDao) {
             this.bookDao = bookDao;
         }
+
         @Override
         protected Void doInBackground(Book... books) {
             bookDao.update(books[0]);
@@ -70,6 +67,7 @@ public class BookRepository {
         private DeleteBookAsyncTask(BookDao bookDao) {
             this.bookDao = bookDao;
         }
+
         @Override
         protected Void doInBackground(Book... books) {
             bookDao.delete(books[0]);

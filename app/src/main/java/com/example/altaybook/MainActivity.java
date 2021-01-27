@@ -81,12 +81,19 @@ public class MainActivity extends AppCompatActivity {
 
         bookAdapter.setOnClickListener(new RecyclerViewAdapter.OnClickListener() {
             @Override
-            public void onClick() {
+            public void onClick(int position) {
+                Log.e("Seçim sayisi: ", "" + bookAdapter.getSelectedBooks().size());
                 if(mActionMode != null) {
                     if(bookAdapter.getSelectedBooks().size() == 0) {
                         mActionMode.finish();
                     }
+                    return;
                 }
+
+                Intent intent = new Intent(MainActivity.this, BookActivity.class);
+                intent.putExtra(BookActivity.BOOK_TEXT, position);
+                startActivity(intent);
+
             }
         });
 
