@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
     private BookViewModel bookViewModel;
     public ActionMode mActionMode;
+    private LoadingDiyalog loadingDiyalog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
         bookAdapter.setOnClickListener(new RecyclerViewAdapter.OnClickListener() {
             @Override
             public void onClick(int position) {
-                Log.e("Seçim sayisi: ", "" + bookAdapter.getSelectedBooks().size());
                 if(mActionMode != null) {
                     if(bookAdapter.getSelectedBooks().size() == 0) {
                         mActionMode.finish();
@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, BookActivity.class);
                 intent.putExtra(BookActivity.BOOK_TEXT, position);
                 startActivity(intent);
+
 
             }
         });
