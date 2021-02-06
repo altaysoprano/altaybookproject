@@ -30,7 +30,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private List<Book> bookList = new ArrayList<>();
     private OnLongClickListener onLongClickListener;
     private OnClickListener onClickListener;
-    MainActivity mainActivity;
     List<Book> selectedBooks;
 
     @NonNull

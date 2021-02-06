@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
 
     private BookViewModel bookViewModel;
     public ActionMode mActionMode;
-    private LoadingDiyalog loadingDiyalog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

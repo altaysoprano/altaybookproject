@@ -13,7 +13,6 @@ public class BookViewModel extends AndroidViewModel {
 
     private BookRepository bookRepository;
     private LiveData<List<Book>> allBooks;
-    private List<Book> allBooksB;
 
     public BookViewModel(@NonNull Application application) {
         super(application);
